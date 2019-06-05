@@ -6,10 +6,10 @@ module Mux(input [31:0] d, c, b, a, input [1:0] sel, output [31:0] out);
             1: outTemp = b;
             2: outTemp = c;
             3: outTemp = d;
-            default: out = a;
+            default: outTemp = a;
         endcase
     end
-    assign out = outTemp
+    assign out = outTemp;
 endmodule
 
 module MuxTB();
