@@ -2,7 +2,7 @@
 module MainMem(input signed [14:0] addressIn, output [31:0] w3, w2, w1, w0);
     reg [31:0] RAM [0:32000 - 1];
     initial begin
-        $readmemb("C:/Users/Mahdi/Desktop/ca5/MainMemory.mem", RAM);
+        $readmemb("C:/Users/user/Desktop/CA CA4/Direct-Mapped-Data-Cache/MainMemory.mem", RAM);
     end
 
     assign {w3, w2, w1, w0} = {RAM[addressIn + (15'd3 - {13'd0, addressIn[1:0]})], RAM[addressIn + (15'd2 - {13'd0, addressIn[1:0]})], RAM[addressIn + (15'd1 - {13'd0, addressIn[1:0]})], RAM[addressIn + (15'd0 - {13'd0, addressIn[1:0]})]};

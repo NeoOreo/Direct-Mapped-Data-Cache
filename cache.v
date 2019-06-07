@@ -11,7 +11,8 @@ module cache(clk, rst, address_in, miss_data4, miss_data3, miss_data2, miss_data
     //assign sel = address_in[1:0];
     //output [31:0] w3, w2, w1, w0;
     output reg [14:0] cnt = 0;
-
+    wire [2:0] TAGG = ROM[index][130:128];
+    wire valid = ROM[index][131];
     integer i;
     //assign {w3, w2, w1, w0} = {ROM[index][127: 96], ROM[index][95: 64], ROM[index][63:32], ROM[index][31:0]};
     always @ ( * ) begin
@@ -24,13 +25,13 @@ module cache(clk, rst, address_in, miss_data4, miss_data3, miss_data2, miss_data
     always @ (posedge clk, posedge rst) begin
         if(rst)
             for (i = 0; i < 1000; i = i + 1)
-                ROM[i] = 132'b0;
+                ROM[i] <= 132'b0;
         else begin
             if(h_or_m == 0) begin
-                ROM[index] = {1'b1, tag, miss_data4, miss_data3, miss_data2, miss_data1};
+                ROM[index] <= {1'b1, tag, miss_data4, miss_data3, miss_data2, miss_data1};
             end
             else
-                cnt = cnt + 1;
+                cnt <= cnt + 1;
         end
 
     end
